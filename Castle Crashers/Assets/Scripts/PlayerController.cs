@@ -10,12 +10,13 @@ public class PlayerController : MonoBehaviour
 
     [System.NonSerialized]
     public Vector2 movement_input;
+    public float movement_speed = 1;
 
     private void Awake()
     {
         controls = new CastleCrashers();
-        //controls.Player.Move.performed += ctx => movement_input = ctx.ReadValue<Vector2>();
-        controls.Player.Move.performed += ctx => Debug.Log("Move");
+        controls.Player.Move.performed += ctx => movement_input = ctx.ReadValue<Vector2>();
+        //controls.Player.Move.performed += ctx => Debug.Log("Move");
         controls.Player.Move.canceled += ctx => movement_input = Vector2.zero;
         controls.Player.Attack.started += ctx => Attack();
     }
@@ -32,8 +33,25 @@ public class PlayerController : MonoBehaviour
     private void HandleMovement()
     {
         Vector3 new_position = gameObject.transform.position;
-        new_position.x += movement_input.x;
-        new_position.y += movement_input.y;
+        new_position.x += movement_input.x * movement_speed * Time.deltaTime;
+        new_position.y += movement_input.y * movement_speed * Time.deltaTime;
         transform.position = new_position;
+    }
+
+    private void OnEnable()
+    {
+        controls.Player.Enable();
+    }
+    public void EnableInput()
+    {
+        controls.Player.Enable();
+    }
+    private void OnDisable()
+    {
+        controls.Player.Disable();
+    }
+    public void DisableInput()
+    {
+        controls.Player.Disable();
     }
 }
