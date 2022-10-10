@@ -19,6 +19,9 @@ public class PlayerController : MonoBehaviour
     public Vector2 movement_input;
     public float movement_speed = 1;
 
+    public GameObject closest_enemy;
+    public Game_Manager manager_script;
+
     private void Awake()
     {
         controls = new CastleCrashers();
@@ -29,6 +32,9 @@ public class PlayerController : MonoBehaviour
 
         //Powerup stuffs
         transform.Find("Shield").gameObject.SetActive(false);
+
+        //Game Manager
+        manager_script = GameObject.FindGameObjectWithTag("Game Manager").GetComponent<Game_Manager>();
     }
 
     void Shieldswap()
@@ -69,6 +75,13 @@ public class PlayerController : MonoBehaviour
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
+        if(collision.gameObject.CompareTag("Enemy"))
+        {
+            closest_enemy = collision.gameObject;
+        }
+    }
+    public void OnCollisionEnter2D(Collision2D collision)
+    {
         if (collision.gameObject.CompareTag("Health"))
         {
             health += 10;
@@ -87,11 +100,24 @@ public class PlayerController : MonoBehaviour
             Destroy(collision.gameObject);
         }
     }
+    public void OnTriggerExit2D(Collider2D other)
+    {
+        if(other.gameObject.tag == "Enemy")
+        {
+            closest_enemy = null;
+        }
+    }
 
 
     private void Attack()
     {
         Debug.Log("Attack");
+        if(closest_enemy != null)
+        {
+            Vector2 enemy_position = closest_enemy.transform.position;
+            manager_script.CalculatePickUp(enemy_position, health);
+            Destroy(closest_enemy);
+        }
         if (projectile_count > 0)
         {
             Instantiate(projectileprefab, launch_offset.position, transform.rotation);
