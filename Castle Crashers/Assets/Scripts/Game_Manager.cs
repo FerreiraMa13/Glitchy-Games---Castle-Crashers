@@ -11,11 +11,37 @@ public class Game_Manager : MonoBehaviour
             ITEM = 2
     }
 
+    [SerializeField] private float timer = 1;
+    private float respawn_timer = 5.0f;
     public GameObject shield_prefab;
     public GameObject hp_prefab;
     public GameObject item_prefab;
     private GameObject prefab;
     public float spawn_rate = 100;
+    [SerializeField] private int round = 0;
+
+
+    private void Update()
+    {
+        if (respawn_timer <= 0)
+        {
+            timer += Time.deltaTime;
+            if ((int)timer % 20 == 0)
+            {
+                timer++;
+                /*
+                 * buff enemies
+                 * respawn enemies
+                 */
+                respawn_timer = 5.0f;
+                round++;
+            }
+        }
+        else
+        {
+            respawn_timer -= Time.deltaTime;
+        }
+    }
 
     public void CalculatePickUp(Vector2 position, float player_hp)
     {
