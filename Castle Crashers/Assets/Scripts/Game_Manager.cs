@@ -51,7 +51,7 @@ public class Game_Manager : MonoBehaviour
         Debug.Log(roll);
         if (roll <= spawn_rate)
         {
-            int loot_id = Random.Range(0, 2);
+            int loot_id = Random.Range(0, 3);
             switch (loot_id) 
             {
                 case 0:
