@@ -3,7 +3,13 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Health
+  - Shield
+  - Item
+  - Enemy
+  - Game Manager
+  - Wall
   layers:
   - Default
   - TransparentFX
