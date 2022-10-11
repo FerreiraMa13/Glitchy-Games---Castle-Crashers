@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class projectiles : MonoBehaviour
 {
-    public float speed = 4.5f;
+    public float speed = 50f;
     void Update()
     {
         transform.position += transform.right * Time.deltaTime * speed;
@@ -12,6 +12,14 @@ public class projectiles : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Destroy(gameObject);
+        if(collision.gameObject.tag == "Enemy")
+        {
+            Destroy(collision.gameObject);
+            Destroy(gameObject);
+        }
+        if(collision.gameObject.tag == "Wall")
+        {
+            Destroy(gameObject);
+        }
     }
 }

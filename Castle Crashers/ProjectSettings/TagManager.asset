@@ -9,6 +9,7 @@ TagManager:
   - Item
   - Enemy
   - Game Manager
+  - Wall
   layers:
   - Default
   - TransparentFX
