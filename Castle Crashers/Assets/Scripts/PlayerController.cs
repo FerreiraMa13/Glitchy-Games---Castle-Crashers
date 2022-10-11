@@ -26,7 +26,7 @@ public class PlayerController : MonoBehaviour
 
     [System.NonSerialized]
     public Vector2 movement_input;
-    public float movement_speed = 1;
+    public float movement_speed = 2;
 
     public GameObject closest_enemy;
     public Game_Manager manager_script;

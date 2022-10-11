@@ -10,6 +10,9 @@ TagManager:
   - Enemy
   - Game Manager
   - Wall
+  - Follow Range
+  - Attack Range
+  - Character
   layers:
   - Default
   - TransparentFX
