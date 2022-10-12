@@ -69,4 +69,9 @@ public class Game_Manager : MonoBehaviour
         }
         
     }
+
+    public float getTimer()
+    {
+        return timer;
+    }
 }

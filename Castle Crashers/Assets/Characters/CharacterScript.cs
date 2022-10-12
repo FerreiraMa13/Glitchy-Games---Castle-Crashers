@@ -5,6 +5,7 @@ using UnityEngine;
 public class CharacterScript : MonoBehaviour
 {
     GameObject character;
+    Game_Manager manager_script;
     [SerializeField] private Transform targetTransform;
     private Transform selfTransform;
     //public Transform selfSpawn; 
@@ -14,7 +15,9 @@ public class CharacterScript : MonoBehaviour
     private Vector2 attackRange = new Vector2(0, 0);
     private Vector2 characterSize = new Vector2(1, 1);
     public GameObject target;
-    [SerializeField] private bool inCombat = false;
+    public float start_cd = 1f;
+    public float follow_cd = 0.25f;
+    [SerializeField] private bool inCombat = true;
     [SerializeField] private bool playerInAttack = false;
     [SerializeField] private int hearts = 1;
     [SerializeField] private int damage = 1;
@@ -40,20 +43,31 @@ public class CharacterScript : MonoBehaviour
         attackTrigger.size = new Vector2(attackRange.x, attackRange.y);
         //transform.position = new Vector2(selfSpawn.position.x, selfSpawn.position.y);
         selfTransform = transform;
+
+        manager_script = GameObject.FindGameObjectWithTag("Game Manager").GetComponent<Game_Manager>();
+    }
+    private void Start()
+    {
+        InvokeRepeating("RotationManage", start_cd, follow_cd);
     }
 
     // Update is called once per frame
     void Update()
     {
+        
+            
 
     }
 
     private void FixedUpdate()
     {
+        
+        
         //Debug.Log("in udpate");
         if (inCombat)
         {
-            changeDirection(target);
+            
+            
             switch (direction)
             {
                 case CharacterDirection.DOWN:
@@ -70,6 +84,11 @@ public class CharacterScript : MonoBehaviour
                     break;
             }
         }
+    }
+
+    public void RotationManage()
+    {
+        changeDirection(target);
     }
 
     public void changeDirection(GameObject targetObject)
@@ -92,7 +111,7 @@ public class CharacterScript : MonoBehaviour
                 //transform.Rotate(0, 0, 90);
                 transform.rotation = Quaternion.Euler(transform.rotation.x, transform.rotation.y, 270);
                 direction = CharacterDirection.UP;
-                Debug.Log("up");
+
             }
         }    
         else
@@ -102,14 +121,14 @@ public class CharacterScript : MonoBehaviour
                 //transform.Rotate(0, 0, 0);
                 transform.rotation = Quaternion.Euler(transform.rotation.x, transform.rotation.y, 0);
                 direction = CharacterDirection.LEFT;
-                Debug.Log("left");
+
             }
             else
             {
                 //transform.Rotate(0, 0, 180);
                 transform.rotation = Quaternion.Euler(transform.rotation.x, transform.rotation.y, 180);
                 direction = CharacterDirection.RIGHT;
-                Debug.Log("right");
+
             }
         }
     }
@@ -128,7 +147,7 @@ public class CharacterScript : MonoBehaviour
        if(collision.gameObject.tag == "Player")
         {
             Debug.Log("NOT Combat");
-            inCombat = false;
+            /*inCombat = false;*/
         }
         
     }
