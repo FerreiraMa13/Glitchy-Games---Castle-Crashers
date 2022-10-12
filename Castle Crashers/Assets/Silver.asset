@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Silver
   m_EditorClassIdentifier: 
   colorMode: 0
-  topLeft: {r: 0.627451, g: 0.23529412, b: 0.53333336, a: 1}
-  topRight: {r: 0.627451, g: 0.23529412, b: 0.53333336, a: 1}
-  bottomLeft: {r: 0.627451, g: 0.23529412, b: 0.53333336, a: 1}
-  bottomRight: {r: 0.627451, g: 0.23529412, b: 0.53333336, a: 1}
+  topLeft: {r: 1, g: 0, b: 0.7600002, a: 1}
+  topRight: {r: 1, g: 0, b: 0.7600002, a: 1}
+  bottomLeft: {r: 1, g: 0, b: 0.7600002, a: 1}
+  bottomRight: {r: 1, g: 0, b: 0.7600002, a: 1}
