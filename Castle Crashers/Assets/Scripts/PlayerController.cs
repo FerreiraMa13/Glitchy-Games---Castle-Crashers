@@ -138,8 +138,15 @@ public class PlayerController : MonoBehaviour
     private void HandleMovement()
     {
         Vector3 new_position = gameObject.transform.position;
-        new_position.x += movement_input.x * movement_speed * Time.deltaTime;
-        new_position.y += movement_input.y * movement_speed * Time.deltaTime;
+        if( Mathf.Abs(movement_input.x) >= Mathf.Abs(movement_input.y))
+        {
+            new_position.x += movement_input.x * movement_speed * Time.deltaTime;
+        }
+        else
+        {
+            new_position.y += movement_input.y * movement_speed * Time.deltaTime;
+        }
+        
         HandleRotation(transform.position, new_position);
         transform.position = new_position;
         

@@ -57,16 +57,16 @@ public class CharacterScript : MonoBehaviour
             switch (direction)
             {
                 case CharacterDirection.DOWN:
-                    transform.position = new Vector2(transform.position.x, transform.position.y - moveSpeed);
+                    transform.position = new Vector2(transform.position.x, transform.position.y - (moveSpeed * Time.deltaTime * speedMultiplier));
                     break;
                 case CharacterDirection.LEFT:
-                    transform.position = new Vector2(transform.position.x - moveSpeed, transform.position.y);
+                    transform.position = new Vector2(transform.position.x - (moveSpeed * Time.deltaTime * speedMultiplier), transform.position.y);
                     break;
                 case CharacterDirection.UP:
-                    transform.position = new Vector2(transform.position.x, transform.position.y + moveSpeed);
+                    transform.position = new Vector2(transform.position.x, transform.position.y + (moveSpeed * Time.deltaTime * speedMultiplier));
                     break;
                 case CharacterDirection.RIGHT:
-                    transform.position = new Vector2(transform.position.x + moveSpeed, transform.position.y);
+                    transform.position = new Vector2(transform.position.x + (moveSpeed * Time.deltaTime * speedMultiplier), transform.position.y);
                     break;
             }
         }
@@ -115,13 +115,21 @@ public class CharacterScript : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D targetCollider)
     {
-        Debug.Log("in Combat");
-        target = targetCollider.gameObject;
-        inCombat = true;
+        if(targetCollider.gameObject.tag == "Player")
+        {
+            Debug.Log("in Combat");
+            target = targetCollider.gameObject;
+            inCombat = true;
+        }
+        
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
-        Debug.Log("NOT Combat");
-        inCombat = false;
+       if(collision.gameObject.tag == "Player")
+        {
+            Debug.Log("NOT Combat");
+            inCombat = false;
+        }
+        
     }
 }
