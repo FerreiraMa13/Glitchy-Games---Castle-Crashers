@@ -39,6 +39,7 @@ public class PlayerController : MonoBehaviour
         //controls.Player.Move.performed += ctx => Debug.Log("Move");
         controls.Player.Move.canceled += ctx => movement_input = Vector2.zero;
         controls.Player.Attack.started += ctx => Attack();
+        controls.Player.Debug.performed += ctx => DebugSpawnEnemy();
 
         //Powerup stuffs
         transform.Find("Shield").gameObject.SetActive(false);
@@ -82,7 +83,6 @@ public class PlayerController : MonoBehaviour
             transform.Find("Shield").gameObject.SetActive(false);
         }
     }
-
     public void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.gameObject.CompareTag("Enemy"))
@@ -117,8 +117,6 @@ public class PlayerController : MonoBehaviour
             closest_enemy = null;
         }
     }
-
-
     private void Attack()
     {
         Debug.Log("Attack");
@@ -134,7 +132,6 @@ public class PlayerController : MonoBehaviour
             projectile_count -= 1;
         }
     }
-
     private void HandleMovement()
     {
         Vector3 new_position = gameObject.transform.position;
@@ -195,7 +192,16 @@ public class PlayerController : MonoBehaviour
                 break;
         }
     }
-
+    public void DebugSpawnEnemy()
+    {
+        if (!manager_script.spawnLowEnemy(Vector2.zero))
+        {
+            if (!manager_script.spawnHighEnemy(Vector2.zero))
+            {
+                Debug.Log("No more enemies");
+            }
+        }
+    }
     private void OnEnable()
     {
         controls.Player.Enable();
