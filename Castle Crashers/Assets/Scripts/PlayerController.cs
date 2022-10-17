@@ -22,9 +22,10 @@ public class PlayerController : MonoBehaviour
     public float max_health = 3;
     public float health = 3;
     public float shield_timer = 0;
-    [SerializeField] RawImage HealthPointOne;
+    public List<RawImage> hearts;
+    /*[SerializeField] RawImage HealthPointOne;
     [SerializeField] RawImage HealthPointTwo;
-    [SerializeField] RawImage HealthPointThree;
+    [SerializeField] RawImage HealthPointThree;*/
     [SerializeField] Color Red;
     [SerializeField] Color White;
     [SerializeField] Color Black;
@@ -33,6 +34,8 @@ public class PlayerController : MonoBehaviour
     public int projectile_count;
     public float invunerability_timer = 2.5f;
     private float current_invun = 0.0f;
+    private bool force_heart_update = false;
+    private float last_update_hp;
 
     [System.NonSerialized]
     public Vector2 movement_input;
@@ -71,70 +74,36 @@ public class PlayerController : MonoBehaviour
         {
             current_invun -= Time.deltaTime;
         }
-
-        if (health == 3)
-        {
-            HealthPointOne.color = Red;
-            HealthPointTwo.color = Red;
-            HealthPointThree.color = Red;
-            if (shield_timer > 0)
-            {
-                HealthPointOne.color = White;
-                HealthPointTwo.color = White;
-                HealthPointThree.color = White;
-            }
-        }
-        else if (health == 2)
-        {
-            HealthPointOne.color = Red;
-            HealthPointTwo.color = Red;
-            HealthPointThree.color = Black;
-            if (shield_timer > 0)
-            {
-                HealthPointOne.color = White;
-                HealthPointTwo.color = White;
-                HealthPointThree.color = Black;
-            }
-        }
-        else if (health == 1)
-        {
-            HealthPointOne.color = Red;
-            HealthPointTwo.color = Black;
-            HealthPointThree.color = Black;
-            if (shield_timer > 0)
-            {
-                HealthPointOne.color = White;
-                HealthPointTwo.color = Black;
-                HealthPointThree.color = Black;
-            }
-        }
-        else if (health == 0)
-        {
-            HealthPointOne.color = Black;
-            HealthPointTwo.color = Black;
-            HealthPointThree.color = Black;
-        }
     }
     private void FixedUpdate()
     {
+        if (last_update_hp != health && health >= 0 || force_heart_update)
+        {
+            UpdateHealth();
+            last_update_hp = health;
+            /*heart_updated = true;*/
+        }
         Transform Shield = transform.Find("Shield");
         HandleMovement();
-
         if (shield_timer > 0)
         {
             Shield.gameObject.SetActive(true);
             shield_timer -= Time.deltaTime;
-
             if (shield_timer < 3 && shield_timer > 0)
             {
                 InvokeRepeating("Shieldswap", 0, 0.5f);
             }
         }
-
         else
         {
             CancelInvoke("Shieldswap");
             transform.Find("Shield").gameObject.SetActive(false);
+        }
+
+        if (shield_timer < 0)
+        {
+            force_heart_update = true;
+            shield_timer = 0;
         }
     }
     public void OnTriggerEnter2D(Collider2D collision)
@@ -164,6 +133,7 @@ public class PlayerController : MonoBehaviour
         {
             Destroy(collision.gameObject);
             shield_timer = 10;
+            force_heart_update = true;
         }
         if (collision.gameObject.CompareTag("Item"))
         {
@@ -181,6 +151,7 @@ public class PlayerController : MonoBehaviour
                 if (shield_timer > 0)
                 {
                     shield_timer = 0;
+                    force_heart_update = true;
                 }
                 else
                 {
@@ -320,5 +291,72 @@ public class PlayerController : MonoBehaviour
     public void DisableInput()
     {
         controls.Player.Disable();
+    }
+    public void UpdateHealth()
+    {
+        foreach(var heart in hearts)
+        {
+            heart.color = Black;
+        }
+
+        for(int i =0; i < health; i++)
+        {
+            if(shield_timer > 0)
+            {
+                hearts[i].color = White;
+            }
+            else
+            {
+                hearts[i].color = Red;
+            }
+        }
+
+        if(force_heart_update)
+        {
+            force_heart_update = false;
+        }
+/*
+        if (health == 3)
+        {
+            HealthPointOne.color = Red;
+            HealthPointTwo.color = Red;
+            HealthPointThree.color = Red;
+            if (shield_timer > 0)
+            {
+                HealthPointOne.color = White;
+                HealthPointTwo.color = White;
+                HealthPointThree.color = White;
+            }
+        }
+        else if (health == 2)
+        {
+            HealthPointOne.color = Red;
+            HealthPointTwo.color = Red;
+            HealthPointThree.color = Black;
+            if (shield_timer > 0)
+            {
+                HealthPointOne.color = White;
+                HealthPointTwo.color = White;
+                HealthPointThree.color = Black;
+            }
+        }
+        else if (health == 1)
+        {
+            HealthPointOne.color = Red;
+            HealthPointTwo.color = Black;
+            HealthPointThree.color = Black;
+            if (shield_timer > 0)
+            {
+                HealthPointOne.color = White;
+                HealthPointTwo.color = Black;
+                HealthPointThree.color = Black;
+            }
+        }
+        else if (health == 0)
+        {
+            HealthPointOne.color = Black;
+            HealthPointTwo.color = Black;
+            HealthPointThree.color = Black;
+        }*/
     }
 }
