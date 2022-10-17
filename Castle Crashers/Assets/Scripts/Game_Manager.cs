@@ -7,15 +7,15 @@ public class Game_Manager : MonoBehaviour
 {
     public enum PICKUPS
     {
-            SHIELD = 0,
-            HP = 1,
-            ITEM = 2
+        SHIELD = 0,
+        HP = 1,
+        ITEM = 2
     }
 
     [SerializeField] private float timer = 1;
     private float game_timer = 0.0f;
-    private float respawn_timer = 5.0f;
     [SerializeField] private TMP_Text timer_text;
+    private float respawn_timer = 2.0f;
     public GameObject shield_prefab;
     public GameObject hp_prefab;
     public GameObject item_prefab;
@@ -25,6 +25,10 @@ public class Game_Manager : MonoBehaviour
     private List<Enemies> low_enemies = new List<Enemies>();
     private List<CharacterScript> high_enemies = new List<CharacterScript>();
     [SerializeField] private int round = 0;
+    private int small_enm_spawn = 1;
+    private int big_enm_spawn = 0;
+    [SerializeField] private GameObject[] spawnpoints = {null,null,null};
+
 
     private void Awake()
     {
@@ -43,18 +47,94 @@ public class Game_Manager : MonoBehaviour
     }
     private void Update()
     {
+        int on_field_small = 0;
+        int on_field_big = 0;
         if (respawn_timer <= 0)
         {
             timer += Time.deltaTime;
-            if ((int)timer % 20 == 0)
+            foreach (var small_enm in low_enemies)
+            {
+                if (small_enm.online)
+                {
+                    on_field_small++;
+                }
+               
+            }
+            foreach (var big_enm in high_enemies)
+            {
+                if(big_enm.online)
+                {
+                    on_field_big++;
+                }
+            }
+            if (on_field_small < small_enm_spawn)
+            {
+                switch (on_field_small)
+                {
+
+                    case 0: spawnLowEnemy(spawnpoints[0].transform.position);
+                        break;
+
+                    case 1: spawnLowEnemy(spawnpoints[1].transform.position);
+                        break;
+
+                    case 2: spawnLowEnemy(spawnpoints[2].transform.position);
+                        break;
+
+                }
+                //spawnLowEnemy(Vector2.zero);
+            }
+
+            if (on_field_big < big_enm_spawn)
+            {
+                switch (on_field_big)
+                {
+
+                    case 0:
+                        spawnHighEnemy(spawnpoints[0].transform.position);
+                        break;
+
+                    case 1:
+                        spawnHighEnemy(spawnpoints[1].transform.position);
+                        break;
+
+                    case 2:
+                        spawnHighEnemy(spawnpoints[2].transform.position);
+                        break;
+
+                }
+            }
+
+            if ((int)timer % 5 == 0)
             {
                 timer++;
-                /*
-                 * buff enemies
-                 * respawn enemies
-                 */
-                respawn_timer = 5.0f;
+                respawn_timer = 2.0f;
                 round++;
+                if (round % 5 == 0)
+                {
+                    big_enm_spawn++;
+                }
+                
+                if (small_enm_spawn < 3)
+                {
+                    small_enm_spawn++;
+                }
+                foreach (var small_enm in low_enemies)
+                {
+                    small_enm.BuffEnemyPassive();
+                    if (round % 5 == 0)
+                    {
+                        small_enm.BuffEnemySpecial();
+                    }
+                }
+                foreach (var big_enm in high_enemies)
+                {
+                    big_enm.BuffEnemyPassive();
+                    if (round % 5 == 0)
+                    {
+                        big_enm.BuffEnemySpecial();
+                    }
+                }
             }
         }
         else

@@ -7,7 +7,7 @@ public class Enemies : MonoBehaviour
     public int full_health;
     public int current_hp;
     public int Damage;
-    public int AttackRate;
+    public float AttackRate;
     public int MovementSpeed;
     public int RotationSpeed;
     public bool online = false;
@@ -34,7 +34,20 @@ public class Enemies : MonoBehaviour
         //.rotation = Quaternion.EulerRotation(newDirection);
         //transform.LookAt(player.transform, transform.up);
     }
+    public void BuffEnemyPassive()
+    {
+        MovementSpeed += 1;
+        if (AttackRate >= 0.3f)
+            AttackRate -= 0.1f;
+    }
 
+    public void BuffEnemySpecial()
+    {
+        if (full_health < 3)
+        {
+            full_health += 1;
+        }
+    }
     public bool RestartEnemy()
     {
         if (!online)

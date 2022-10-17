@@ -153,4 +153,18 @@ public class CharacterScript : MonoBehaviour
         }
         return false;
     }
+    public void BuffEnemyPassive()
+    {
+        moveSpeed += 1;
+        //if (AttackRate >= 0.3f)
+        //    AttackRate -= 0.1f;
+    }
+
+    public void BuffEnemySpecial()
+    {
+        if (full_hearts < 3)
+        {
+            full_hearts += 1;
+        }
+    }
 }
