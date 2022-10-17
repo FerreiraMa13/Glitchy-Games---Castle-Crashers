@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 5635250990674259622}
   - component: {fileID: 5635250990674259623}
   - component: {fileID: 5635250990674259620}
-  m_Layer: 0
+  - component: {fileID: -6271724979375951942}
+  m_Layer: 6
   m_Name: Clearly Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -124,8 +125,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97d0e38cb703d8140b9a455071806ae5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Health: 1
+  full_health: 0
+  current_hp: 0
   Damage: 1
   AttackRate: 1
   MovementSpeed: 1
   RotationSpeed: 1
+  online: 0
+--- !u!50 &-6271724979375951942
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5635250990674259624}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5038444012078333402}
   - component: {fileID: 4342760570488509148}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Direction
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1565831783633386591}
   - component: {fileID: 8401547906106574995}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Square
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -179,7 +179,8 @@ GameObject:
   - component: {fileID: 6627296912057915817}
   - component: {fileID: 8982628324850255070}
   - component: {fileID: 1031304297358712364}
-  m_Layer: 0
+  - component: {fileID: -7254032332424309882}
+  m_Layer: 6
   m_Name: Character 1
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -253,6 +254,27 @@ MonoBehaviour:
   playerInAttack: 0
   hearts: 1
   damage: 1
+--- !u!50 &-7254032332424309882
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2210169869893199696}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
 --- !u!1 &2409978851981717933
 GameObject:
   m_ObjectHideFlags: 0
@@ -263,7 +285,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6527681051332588560}
   - component: {fileID: 5779550539252059325}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Follow Range
   m_TagString: Follow Range
   m_Icon: {fileID: 0}
@@ -322,7 +344,7 @@ GameObject:
   - component: {fileID: 937986008075967978}
   - component: {fileID: 7699628447462496542}
   - component: {fileID: 6492942359224828374}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Character Texture
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -433,7 +455,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6596633556646376072}
   - component: {fileID: 8503786877717937284}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Attack Range
   m_TagString: Attack Range
   m_Icon: {fileID: 0}
@@ -493,7 +515,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7117652211267592017}
   - component: {fileID: 4266435480448325635}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Square (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

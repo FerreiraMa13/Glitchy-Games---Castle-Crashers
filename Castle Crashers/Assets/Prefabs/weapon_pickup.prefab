@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 3050622941927788187}
   - component: {fileID: 3050622941927788184}
   - component: {fileID: 3050622941927788185}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: weapon_pickup
   m_TagString: Item
   m_Icon: {fileID: 0}

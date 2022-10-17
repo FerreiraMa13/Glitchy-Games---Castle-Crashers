@@ -1232,7 +1232,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0.366901, g: 0.55040073, b: 0.9150943, a: 1}
+  m_Color: {r: 0.17254902, g: 0.1882353, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -1250,7 +1250,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1234738835}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 1000}
+  m_LocalPosition: {x: 0, y: 0, z: 1}
   m_LocalScale: {x: 13.5, y: 10, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1395,6 +1395,32 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 54, y: 2}
   m_EdgeRadius: 0
+--- !u!1 &1360896641 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5635250990674259624, guid: 6f82b0d4309bfee4e92eaedb0a75a0cb, type: 3}
+  m_PrefabInstance: {fileID: 5635250990376375727}
+  m_PrefabAsset: {fileID: 0}
+--- !u!50 &1360896646
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1360896641}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
 --- !u!1 &1379264245
 GameObject:
   m_ObjectHideFlags: 0
@@ -1688,18 +1714,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5635250990674259621, guid: 6f82b0d4309bfee4e92eaedb0a75a0cb, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5635250990674259623, guid: 6f82b0d4309bfee4e92eaedb0a75a0cb, type: 3}
-      propertyPath: m_Size.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5635250990674259623, guid: 6f82b0d4309bfee4e92eaedb0a75a0cb, type: 3}
-      propertyPath: m_Size.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5635250990674259623, guid: 6f82b0d4309bfee4e92eaedb0a75a0cb, type: 3}
-      propertyPath: m_IsTrigger
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5635250990674259624, guid: 6f82b0d4309bfee4e92eaedb0a75a0cb, type: 3}
@@ -2143,7 +2157,7 @@ MonoBehaviour:
   Black: {r: 0, g: 0, b: 0, a: 1}
   projectileprefab: {fileID: 6808042069520030811, guid: 0b5b99b5ef05ff848aff7417b7535307, type: 3}
   launch_offset: {fileID: 1826001293}
-  projectile_count: 0
+  projectile_count: 99
   invunerability_timer: 2.5
   movement_speed: 10
   closest_enemy: {fileID: 0}
@@ -2416,7 +2430,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6029231119818576407, guid: b8192ac87713535468855a824d407a8d, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 6029231119818576407, guid: b8192ac87713535468855a824d407a8d, type: 3}
       propertyPath: m_LocalRotation.w
