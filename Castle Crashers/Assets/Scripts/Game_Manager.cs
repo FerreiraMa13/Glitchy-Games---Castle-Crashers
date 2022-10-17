@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class Game_Manager : MonoBehaviour
 {
@@ -12,7 +13,9 @@ public class Game_Manager : MonoBehaviour
     }
 
     [SerializeField] private float timer = 1;
+    private float game_timer = 0.0f;
     private float respawn_timer = 5.0f;
+    [SerializeField] private TMP_Text timer_text;
     public GameObject shield_prefab;
     public GameObject hp_prefab;
     public GameObject item_prefab;
@@ -58,6 +61,11 @@ public class Game_Manager : MonoBehaviour
         {
             respawn_timer -= Time.deltaTime;
         }
+
+        game_timer += Time.deltaTime;
+        int minutes = Mathf.FloorToInt(game_timer / 60.0f);
+        int seconds = Mathf.FloorToInt(game_timer - minutes * 60);
+        timer_text.text = string.Format("{0:00}:{1:00}", minutes, seconds);
     }
     public void CalculatePickUp(Vector2 position, float player_hp)
     {

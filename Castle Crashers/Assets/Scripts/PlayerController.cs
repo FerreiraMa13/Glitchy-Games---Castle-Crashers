@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -21,6 +22,12 @@ public class PlayerController : MonoBehaviour
     public float max_health = 3;
     public float health = 3;
     public float shield_timer = 0;
+    [SerializeField] RawImage HealthPointOne;
+    [SerializeField] RawImage HealthPointTwo;
+    [SerializeField] RawImage HealthPointThree;
+    [SerializeField] Color Red;
+    [SerializeField] Color White;
+    [SerializeField] Color Black;
     public projectiles projectileprefab;
     public Transform launch_offset;
     public int projectile_count;
@@ -63,6 +70,49 @@ public class PlayerController : MonoBehaviour
         if(current_invun > 0)
         {
             current_invun -= Time.deltaTime;
+        }
+
+        if (health == 3)
+        {
+            HealthPointOne.color = Red;
+            HealthPointTwo.color = Red;
+            HealthPointThree.color = Red;
+            if (shield_timer > 0)
+            {
+                HealthPointOne.color = White;
+                HealthPointTwo.color = White;
+                HealthPointThree.color = White;
+            }
+        }
+        else if (health == 2)
+        {
+            HealthPointOne.color = Red;
+            HealthPointTwo.color = Red;
+            HealthPointThree.color = Black;
+            if (shield_timer > 0)
+            {
+                HealthPointOne.color = White;
+                HealthPointTwo.color = White;
+                HealthPointThree.color = Black;
+            }
+        }
+        else if (health == 1)
+        {
+            HealthPointOne.color = Red;
+            HealthPointTwo.color = Black;
+            HealthPointThree.color = Black;
+            if (shield_timer > 0)
+            {
+                HealthPointOne.color = White;
+                HealthPointTwo.color = Black;
+                HealthPointThree.color = Black;
+            }
+        }
+        else if (health == 0)
+        {
+            HealthPointOne.color = Black;
+            HealthPointTwo.color = Black;
+            HealthPointThree.color = Black;
         }
     }
     private void FixedUpdate()
