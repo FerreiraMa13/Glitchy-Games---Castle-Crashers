@@ -43,7 +43,7 @@ public class CharacterScript : MonoBehaviour
         //transform.position = new Vector2(selfSpawn.position.x, selfSpawn.position.y);
         selfTransform = transform;
         manager_script = GameObject.FindGameObjectWithTag("Game Manager").GetComponent<Game_Manager>();
-
+        target = GameObject.FindGameObjectWithTag("Player");
         hearts = full_hearts;
     }
     private void Start()

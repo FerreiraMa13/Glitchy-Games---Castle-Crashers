@@ -18,7 +18,7 @@ public class PlayerController : MonoBehaviour
         DOWN = 3
     }
     //Powerup stuffs
-    public float health = 100;
+    public float health = 3;
     public float shield_timer = 0;
     public projectiles projectileprefab;
     public Transform launch_offset;
@@ -36,7 +36,6 @@ public class PlayerController : MonoBehaviour
         controller = GetComponent<CharacterController>();
         controls = new CastleCrashers();
         controls.Player.Move.performed += ctx => movement_input = ctx.ReadValue<Vector2>();
-        //controls.Player.Move.performed += ctx => Debug.Log("Move");
         controls.Player.Move.canceled += ctx => movement_input = Vector2.zero;
         controls.Player.Attack.started += ctx => Attack();
         controls.Player.Debug.performed += ctx => DebugSpawnEnemy();
@@ -87,7 +86,10 @@ public class PlayerController : MonoBehaviour
     {
         if(collision.gameObject.CompareTag("Enemy"))
         {
-            closest_enemy = collision.gameObject;
+            if((transform.position - collision.transform.position).magnitude < (transform.position - closest_enemy.transform.position).magnitude)
+            {
+                closest_enemy = collision.gameObject;
+            }
         }
     }
     public void OnCollisionEnter2D(Collision2D collision)
