@@ -21,7 +21,7 @@ public class CharacterScript : MonoBehaviour
     public bool online = false;
     [SerializeField] private bool inCombat = true;
     [SerializeField] private bool playerInAttack = false;
-    [SerializeField] private int hearts;
+    public int hearts;
     [SerializeField] private int damage = 1;
     
     public enum CharacterDirection

@@ -18,11 +18,14 @@ public class PlayerController : MonoBehaviour
         DOWN = 3
     }
     //Powerup stuffs
+    public float max_health = 3;
     public float health = 3;
     public float shield_timer = 0;
     public projectiles projectileprefab;
     public Transform launch_offset;
     public int projectile_count;
+    public float invunerability_timer = 2.5f;
+    private float current_invun = 0.0f;
 
     [System.NonSerialized]
     public Vector2 movement_input;
@@ -45,8 +48,8 @@ public class PlayerController : MonoBehaviour
 
         //Game Manager
         manager_script = GameObject.FindGameObjectWithTag("Game Manager").GetComponent<Game_Manager>();
+        health = max_health;
     }
-
     void Shieldswap()
     {
         Transform Shield = transform.Find("Shield");
@@ -55,15 +58,17 @@ public class PlayerController : MonoBehaviour
         else
             Shield.gameObject.SetActive(true);
     }
-
+    private void Update()
+    {
+        if(current_invun > 0)
+        {
+            current_invun -= Time.deltaTime;
+        }
+    }
     private void FixedUpdate()
     {
         Transform Shield = transform.Find("Shield");
         HandleMovement();
-        if (Input.GetKey(KeyCode.D))
-        {
-            health--;
-        }
 
         if (shield_timer > 0)
         {
@@ -86,7 +91,10 @@ public class PlayerController : MonoBehaviour
     {
         if(collision.gameObject.CompareTag("Enemy"))
         {
-            if((transform.position - collision.transform.position).magnitude < (transform.position - closest_enemy.transform.position).magnitude)
+            if (closest_enemy == null ||
+                (transform.position - collision.transform.position).magnitude < 
+                (transform.position - closest_enemy.transform.position).magnitude
+                )
             {
                 closest_enemy = collision.gameObject;
             }
@@ -96,20 +104,46 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Health"))
         {
-            health += 10;
+            if(health < max_health)
+            {
+                health += 1;
+            }
             Destroy(collision.gameObject);
         }
-
         if (collision.gameObject.CompareTag("Shield"))
         {
             Destroy(collision.gameObject);
             shield_timer = 10;
         }
-
         if (collision.gameObject.CompareTag("Item"))
         {
             projectile_count += 1;
             Destroy(collision.gameObject);
+        }
+        
+    }
+    public void OnCollisionStay2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            if(current_invun <= 0)
+            {
+                if (shield_timer > 0)
+                {
+                    shield_timer = 0;
+                }
+                else
+                {
+                    health--;
+                    Debug.Log(health);
+                    if (health <= 0)
+                    {
+                        Debug.Log("You Died... Horribly!");
+                    }
+                }
+
+                current_invun = invunerability_timer;
+            }
         }
     }
     public void OnTriggerExit2D(Collider2D other)
@@ -126,7 +160,24 @@ public class PlayerController : MonoBehaviour
         {
             Vector2 enemy_position = closest_enemy.transform.position;
             manager_script.CalculatePickUp(enemy_position, health);
-            Destroy(closest_enemy);
+            if(closest_enemy.GetComponent<Enemies>())
+            {
+                var low_enemy = closest_enemy.GetComponent<Enemies>();
+                low_enemy.current_hp--;
+                if(low_enemy.current_hp < 1)
+                {
+                    manager_script.EndEnemy(closest_enemy);
+                }
+            }
+            else if(closest_enemy.GetComponent<CharacterScript>())
+            {
+                var high_enemy = closest_enemy.GetComponent<CharacterScript>();
+                high_enemy.hearts--;
+                if(high_enemy.hearts < 1)
+                {
+                    manager_script.EndEnemy(closest_enemy);
+                }
+            }
         }
         if (projectile_count > 0)
         {
