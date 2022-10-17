@@ -1389,11 +1389,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0c4becff383fb644a43d726a1669a48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 100
+  max_health: 3
+  health: 3
   shield_timer: 0
   projectileprefab: {fileID: 6808042069520030811, guid: 0b5b99b5ef05ff848aff7417b7535307, type: 3}
   launch_offset: {fileID: 1826001293}
   projectile_count: 0
+  invunerability_timer: 2.5
   movement_speed: 10
   closest_enemy: {fileID: 0}
   manager_script: {fileID: 0}
