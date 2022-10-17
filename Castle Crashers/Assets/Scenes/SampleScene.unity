@@ -323,7 +323,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 15
+  m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &118887534
 GameObject:
@@ -740,7 +740,7 @@ Transform:
   - {fileID: 1703645311}
   - {fileID: 1553365450}
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1030052434 stripped
 GameObject:
@@ -2052,7 +2052,7 @@ MonoBehaviour:
   HealthPointOne: {fileID: 494951148}
   HealthPointTwo: {fileID: 2040813092}
   HealthPointThree: {fileID: 1082649871}
-  Red: {r: 1, g: 0, b: 0, a: 0}
+  Red: {r: 0.53333336, g: 0, b: 0, a: 0}
   White: {r: 1, g: 1, b: 1, a: 0}
   Black: {r: 0, g: 0, b: 0, a: 0}
   projectileprefab: {fileID: 6808042069520030811, guid: 0b5b99b5ef05ff848aff7417b7535307, type: 3}

@@ -15,7 +15,7 @@ public class Game_Manager : MonoBehaviour
     [SerializeField] private float timer = 1;
     private float game_timer = 0.0f;
     [SerializeField] private TMP_Text timer_text;
-    private float respawn_timer = 2.0f;
+    private float respawn_timer = 5.0f;
     public GameObject shield_prefab;
     public GameObject hp_prefab;
     public GameObject item_prefab;
@@ -108,7 +108,7 @@ public class Game_Manager : MonoBehaviour
             if ((int)timer % 5 == 0)
             {
                 timer++;
-                respawn_timer = 2.0f;
+                respawn_timer = 5.0f;
                 round++;
                 if (round % 5 == 0)
                 {
