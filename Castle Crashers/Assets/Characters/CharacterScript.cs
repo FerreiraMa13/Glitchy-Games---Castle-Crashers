@@ -17,9 +17,11 @@ public class CharacterScript : MonoBehaviour
     public GameObject target;
     public float start_cd = 1f;
     public float follow_cd = 0.25f;
+    public int full_hearts = 2;
+    public bool online = false;
     [SerializeField] private bool inCombat = true;
     [SerializeField] private bool playerInAttack = false;
-    [SerializeField] private int hearts = 1;
+    [SerializeField] private int hearts;
     [SerializeField] private int damage = 1;
     
     public enum CharacterDirection
@@ -32,42 +34,27 @@ public class CharacterScript : MonoBehaviour
 
     private CharacterDirection direction; 
     
-    
-
     // Start is called before the first frame update
     void Awake()
     {
         attackTrigger = GameObject.Find("Attack Range").GetComponent<BoxCollider2D>();
         character = gameObject;
-
         attackTrigger.size = new Vector2(attackRange.x, attackRange.y);
         //transform.position = new Vector2(selfSpawn.position.x, selfSpawn.position.y);
         selfTransform = transform;
-
         manager_script = GameObject.FindGameObjectWithTag("Game Manager").GetComponent<Game_Manager>();
+        target = GameObject.FindGameObjectWithTag("Player");
+        hearts = full_hearts;
     }
     private void Start()
     {
         InvokeRepeating("RotationManage", start_cd, follow_cd);
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-            
-
-    }
-
     private void FixedUpdate()
     {
-        
-        
         //Debug.Log("in udpate");
-        if (inCombat)
+        if (online)
         {
-            
-            
             switch (direction)
             {
                 case CharacterDirection.DOWN:
@@ -85,12 +72,13 @@ public class CharacterScript : MonoBehaviour
             }
         }
     }
-
     public void RotationManage()
     {
-        changeDirection(target);
+        if(online)
+        {
+            changeDirection(target);
+        }
     }
-
     public void changeDirection(GameObject targetObject)
     {
         float xDif = transform.position.x - targetObject.transform.position.x;
@@ -134,21 +122,35 @@ public class CharacterScript : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D targetCollider)
     {
-        if(targetCollider.gameObject.tag == "Player")
+        if(online)
         {
-            Debug.Log("in Combat");
-            target = targetCollider.gameObject;
-            inCombat = true;
+            if (targetCollider.gameObject.tag == "Player")
+            {
+                Debug.Log("in Combat");
+                target = targetCollider.gameObject;
+                inCombat = true;
+            }
         }
-        
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
-       if(collision.gameObject.tag == "Player")
+        if(online)
         {
-            Debug.Log("NOT Combat");
-            /*inCombat = false;*/
+            if (collision.gameObject.tag == "Player")
+            {
+                Debug.Log("NOT Combat");
+                /*inCombat = false;*/
+            }
         }
-        
+    }
+    public bool RestartEnemy()
+    {
+        if (!online)
+        {
+            hearts = full_hearts;
+            online = true;
+            return true;
+        }
+        return false;
     }
 }

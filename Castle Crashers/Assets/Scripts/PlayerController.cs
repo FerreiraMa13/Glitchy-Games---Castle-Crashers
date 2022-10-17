@@ -18,7 +18,7 @@ public class PlayerController : MonoBehaviour
         DOWN = 3
     }
     //Powerup stuffs
-    public float health = 100;
+    public float health = 3;
     public float shield_timer = 0;
     public projectiles projectileprefab;
     public Transform launch_offset;
@@ -36,9 +36,9 @@ public class PlayerController : MonoBehaviour
         controller = GetComponent<CharacterController>();
         controls = new CastleCrashers();
         controls.Player.Move.performed += ctx => movement_input = ctx.ReadValue<Vector2>();
-        //controls.Player.Move.performed += ctx => Debug.Log("Move");
         controls.Player.Move.canceled += ctx => movement_input = Vector2.zero;
         controls.Player.Attack.started += ctx => Attack();
+        controls.Player.Debug.performed += ctx => DebugSpawnEnemy();
 
         //Powerup stuffs
         transform.Find("Shield").gameObject.SetActive(false);
@@ -82,12 +82,14 @@ public class PlayerController : MonoBehaviour
             transform.Find("Shield").gameObject.SetActive(false);
         }
     }
-
     public void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.gameObject.CompareTag("Enemy"))
         {
-            closest_enemy = collision.gameObject;
+            if((transform.position - collision.transform.position).magnitude < (transform.position - closest_enemy.transform.position).magnitude)
+            {
+                closest_enemy = collision.gameObject;
+            }
         }
     }
     public void OnCollisionEnter2D(Collision2D collision)
@@ -117,8 +119,6 @@ public class PlayerController : MonoBehaviour
             closest_enemy = null;
         }
     }
-
-
     private void Attack()
     {
         Debug.Log("Attack");
@@ -134,7 +134,6 @@ public class PlayerController : MonoBehaviour
             projectile_count -= 1;
         }
     }
-
     private void HandleMovement()
     {
         Vector3 new_position = gameObject.transform.position;
@@ -195,7 +194,16 @@ public class PlayerController : MonoBehaviour
                 break;
         }
     }
-
+    public void DebugSpawnEnemy()
+    {
+        if (!manager_script.spawnLowEnemy(Vector2.zero))
+        {
+            if (!manager_script.spawnHighEnemy(Vector2.zero))
+            {
+                Debug.Log("No more enemies");
+            }
+        }
+    }
     private void OnEnable()
     {
         controls.Player.Enable();

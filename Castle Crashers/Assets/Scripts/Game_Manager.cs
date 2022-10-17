@@ -18,9 +18,26 @@ public class Game_Manager : MonoBehaviour
     public GameObject item_prefab;
     private GameObject prefab;
     public float spawn_rate = 100;
+    public Vector2 offline_pos = new Vector2(900, 900);
+    private List<Enemies> low_enemies = new List<Enemies>();
+    private List<CharacterScript> high_enemies = new List<CharacterScript>();
     [SerializeField] private int round = 0;
 
-
+    private void Awake()
+    {
+        var found_enemies = GameObject.FindGameObjectsWithTag("Enemy");
+        foreach (var enemy in found_enemies)
+        {
+            if(enemy.GetComponent<Enemies>() != null)
+            {
+                low_enemies.Add(enemy.GetComponent<Enemies>());
+            }
+            else if(enemy.GetComponent<CharacterScript>() != null)
+            {
+                high_enemies.Add(enemy.GetComponent<CharacterScript>());
+            }
+        }
+    }
     private void Update()
     {
         if (respawn_timer <= 0)
@@ -42,7 +59,6 @@ public class Game_Manager : MonoBehaviour
             respawn_timer -= Time.deltaTime;
         }
     }
-
     public void CalculatePickUp(Vector2 position, float player_hp)
     {
 
@@ -69,9 +85,58 @@ public class Game_Manager : MonoBehaviour
         }
         
     }
-
     public float getTimer()
     {
         return timer;
+    }
+    public bool spawnLowEnemy(Vector2 spawnpoint)
+    {
+        foreach(var enemy in low_enemies)
+        {
+            if(!enemy.online)
+            {
+                enemy.transform.position = spawnpoint;
+                enemy.RestartEnemy();
+                return true;
+            }
+        }
+        return false;
+    }
+    public bool spawnHighEnemy(Vector2 spawnpoint)
+    {
+        foreach (var enemy in high_enemies)
+        {
+            if (!enemy.online)
+            {
+                enemy.transform.position = spawnpoint;
+                enemy.RestartEnemy();
+                return true;
+            }
+        }
+        return false;
+    }
+    public void EndEnemy(GameObject enemy)
+    {
+        if(enemy.tag == "Enemy")
+        {
+            if(enemy.GetComponent<Enemies>() != null)
+            {
+                var enemy_script = enemy.GetComponent<Enemies>();
+                if(low_enemies.Contains(enemy_script))
+                {
+                    enemy_script.online = false;
+                    enemy.transform.position = offline_pos;
+                }
+            }
+            if (enemy.GetComponent<CharacterScript>() != null)
+            {
+                var enemy_script = enemy.GetComponent<CharacterScript>();
+                if (high_enemies.Contains(enemy_script))
+                {
+                    enemy_script.online = false;
+                    enemy.transform.position = offline_pos;
+                }
+            }
+        }
     }
 }

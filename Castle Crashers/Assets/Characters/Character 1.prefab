@@ -179,7 +179,6 @@ GameObject:
   - component: {fileID: 6627296912057915817}
   - component: {fileID: 8982628324850255070}
   - component: {fileID: 1031304297358712364}
-  - component: {fileID: 3177147139742299938}
   m_Layer: 0
   m_Name: Character 1
   m_TagString: Enemy
@@ -248,31 +247,12 @@ MonoBehaviour:
   target: {fileID: 0}
   start_cd: 1
   follow_cd: 1
+  full_hearts: 2
+  online: 0
   inCombat: 0
   playerInAttack: 0
   hearts: 1
   damage: 1
---- !u!50 &3177147139742299938
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2210169869893199696}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 4
 --- !u!1 &2409978851981717933
 GameObject:
   m_ObjectHideFlags: 0
