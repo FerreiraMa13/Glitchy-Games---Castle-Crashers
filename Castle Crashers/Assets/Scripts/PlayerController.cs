@@ -34,6 +34,7 @@ public class PlayerController : MonoBehaviour
     private float current_invun = 0.0f;
     private bool force_heart_update = false;
     private float last_update_hp;
+    public bool immortal;
 
     [System.NonSerialized]
     public Vector2 movement_input;
@@ -47,11 +48,11 @@ public class PlayerController : MonoBehaviour
     {
         if (sprite = transform.GetComponentInChildren<SpriteRenderer>())
         {
-            Debug.Log("Color selected");
-            sprite.color = StaticGlobals.player_color;
+            if(StaticGlobals.player_color != null)
+            {
+                sprite.color = StaticGlobals.player_color;
+            }
         }
-        
-        
         controller = GetComponent<CharacterController>();
         controls = new CastleCrashers();
         controls.Player.Move.performed += ctx => movement_input = ctx.ReadValue<Vector2>();

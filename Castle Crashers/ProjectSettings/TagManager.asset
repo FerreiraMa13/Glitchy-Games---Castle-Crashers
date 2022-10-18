@@ -13,6 +13,7 @@ TagManager:
   - Follow Range
   - Attack Range
   - Character
+  - Timer
   layers:
   - Default
   - TransparentFX
