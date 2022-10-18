@@ -62,7 +62,7 @@ public class Game_Manager : MonoBehaviour
             }*/
             if (enemy.GetComponent<CharacterScript>() != null)
             {
-                if (enemy.GetComponent<CharacterScript>().isStrong == true)
+                if (!enemy.GetComponent<CharacterScript>().isStrong)
                 {
                     low_enemies.Add(enemy.GetComponent<CharacterScript>());
                 }
@@ -270,7 +270,7 @@ public class Game_Manager : MonoBehaviour
             if (enemy.GetComponent<CharacterScript>() != null)
             {
                 var enemy_script = enemy.GetComponent<CharacterScript>();
-                if (high_enemies.Contains(enemy_script))
+                if (high_enemies.Contains(enemy_script) || low_enemies.Contains(enemy_script))
                 {
                     enemy_script.online = false;
                     //enemy.transform.position = offline_pos;
