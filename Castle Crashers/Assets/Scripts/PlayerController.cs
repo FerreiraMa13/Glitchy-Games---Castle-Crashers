@@ -43,6 +43,7 @@ public class PlayerController : MonoBehaviour
     public GameObject closest_enemy;
     public Game_Manager manager_script;
     private SpriteRenderer sprite;
+    private AudioSource hit_sound;
 
     private void Awake()
     {
@@ -66,6 +67,8 @@ public class PlayerController : MonoBehaviour
         //Game Manager
         manager_script = GameObject.FindGameObjectWithTag("Game Manager").GetComponent<Game_Manager>();
         health = max_health;
+
+        hit_sound = GetComponent<AudioSource>();
     }
     void Shieldswap()
     {
@@ -189,6 +192,7 @@ public class PlayerController : MonoBehaviour
         Debug.Log("Attack");
         if(closest_enemy != null)
         {
+            hit_sound.Play();
             Vector2 enemy_position = closest_enemy.transform.position;
             manager_script.CalculatePickUp(enemy_position, health);
             if(closest_enemy.GetComponent<Enemies>())
