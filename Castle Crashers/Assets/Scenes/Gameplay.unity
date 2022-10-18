@@ -2270,7 +2270,6 @@ GameObject:
   - component: {fileID: 2141590494}
   - component: {fileID: 2141590495}
   - component: {fileID: 2141590496}
-  - component: {fileID: 2141590497}
   - component: {fileID: 2141590498}
   m_Layer: 0
   m_Name: Player
@@ -2399,9 +2398,9 @@ MonoBehaviour:
   Black: {r: 0, g: 0, b: 0, a: 1}
   projectileprefab: {fileID: 6808042069520030811, guid: 0b5b99b5ef05ff848aff7417b7535307, type: 3}
   launch_offset: {fileID: 1826001293}
-  projectile_count: 99
+  projectile_count: 0
   invunerability_timer: 2.5
-  movement_speed: 10
+  movement_speed: 6
   closest_enemy: {fileID: 0}
   manager_script: {fileID: 0}
 --- !u!50 &2141590495
@@ -2451,22 +2450,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.5, y: 1.5}
   m_EdgeRadius: 0
---- !u!58 &2141590497
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2141590490}
-  m_Enabled: 0
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 1.5
 --- !u!61 &2141590498
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2480,7 +2463,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 1.25, y: 0}
+  m_Offset: {x: 1.5, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -2491,7 +2474,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 2.5, y: 2.5}
+  m_Size: {x: 3, y: 3}
   m_EdgeRadius: 0
 --- !u!1001 &3050622941990093721
 PrefabInstance:
@@ -2573,6 +2556,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 5635250990674259620, guid: 6f82b0d4309bfee4e92eaedb0a75a0cb, type: 3}
+      propertyPath: single_axis_movement
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5635250990674259621, guid: 6f82b0d4309bfee4e92eaedb0a75a0cb, type: 3}
       propertyPath: m_RootOrder
       value: 11

@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     CastleCrashers controls;
     CharacterController controller;
 
+
     enum DIRECTION
     {
         NULL = -1,
@@ -23,9 +24,6 @@ public class PlayerController : MonoBehaviour
     public float health = 3;
     public float shield_timer = 0;
     public List<RawImage> hearts;
-    /*[SerializeField] RawImage HealthPointOne;
-    [SerializeField] RawImage HealthPointTwo;
-    [SerializeField] RawImage HealthPointThree;*/
     [SerializeField] Color Red;
     [SerializeField] Color White;
     [SerializeField] Color Black;
@@ -46,6 +44,7 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
+        
         controller = GetComponent<CharacterController>();
         controls = new CastleCrashers();
         controls.Player.Move.performed += ctx => movement_input = ctx.ReadValue<Vector2>();

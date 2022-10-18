@@ -8,10 +8,12 @@ public class Enemies : MonoBehaviour
     public int current_hp;
     public int Damage;
     public float AttackRate;
-    public int MovementSpeed;
+    public float MovementSpeed;
     public int RotationSpeed;
     public bool online = false;
+    public float movement_buff = 1f;
     GameObject player;
+    public bool single_axis_movement = false;
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
@@ -25,7 +27,27 @@ public class Enemies : MonoBehaviour
         if(online)
         {
             float step = MovementSpeed * Time.deltaTime;
-            transform.position = Vector2.MoveTowards(transform.position, player.transform.position, step);
+            
+            if (single_axis_movement)
+            { 
+                float dif_x = Mathf.Abs(transform.position.x - player.transform.position.x);
+                float dif_y = Mathf.Abs(transform.position.y - player.transform.position.y);
+                var player_x = new Vector2(player.transform.position.x, transform.position.y);
+                var player_y = new Vector2(transform.position.x, player.transform.position.y);
+                if (dif_x > dif_y)
+                {
+                    transform.position = Vector2.MoveTowards(transform.position, player_x, step);
+                }
+                else
+                {
+                    transform.position = Vector2.MoveTowards(transform.position, player_y, step);
+                }
+            }
+            else
+            {
+                transform.position = Vector2.MoveTowards(transform.position, player.transform.position, step);
+            }
+            
         }
         //Vector3 targetDirection = player.transform.position - transform.position;
         //targetDirection.y = Vector3.zero.y;
@@ -36,7 +58,7 @@ public class Enemies : MonoBehaviour
     }
     public void BuffEnemyPassive()
     {
-        MovementSpeed += 1;
+        MovementSpeed += movement_buff;
         if (AttackRate >= 0.3f)
             AttackRate -= 0.1f;
     }

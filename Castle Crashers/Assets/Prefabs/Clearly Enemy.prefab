@@ -132,6 +132,8 @@ MonoBehaviour:
   MovementSpeed: 1
   RotationSpeed: 1
   online: 0
+  movement_buff: 0.5
+  single_axis_movement: 0
 --- !u!50 &-6271724979375951942
 Rigidbody2D:
   serializedVersion: 4

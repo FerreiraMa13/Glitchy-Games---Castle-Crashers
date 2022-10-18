@@ -209,7 +209,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1727423314}
         m_TargetAssemblyTypeName: CharSelectMenu, Assembly-CSharp
-        m_MethodName: PlayGameCharacter
+        m_MethodName: CharacterYellow
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -343,7 +343,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1727423314}
         m_TargetAssemblyTypeName: CharSelectMenu, Assembly-CSharp
-        m_MethodName: PlayGameCharacter
+        m_MethodName: CharacterGreen
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -477,7 +477,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1727423314}
         m_TargetAssemblyTypeName: CharSelectMenu, Assembly-CSharp
-        m_MethodName: PlayGameCharacter
+        m_MethodName: CharacterRed
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -670,7 +670,7 @@ GameObject:
   m_Component:
   - component: {fileID: 908001745}
   - component: {fileID: 908001744}
-  - component: {fileID: 908001743}
+  - component: {fileID: 908001746}
   m_Layer: 0
   m_Name: EventSystem
   m_TagString: Untagged
@@ -678,25 +678,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &908001743
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 908001742}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f231c4fb786f3946a6b90b886c48677, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_HorizontalAxis: Horizontal
-  m_VerticalAxis: Vertical
-  m_SubmitButton: Submit
-  m_CancelButton: Cancel
-  m_InputActionsPerSecond: 10
-  m_RepeatDelay: 0.5
-  m_ForceModuleActive: 0
 --- !u!114 &908001744
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -727,6 +708,34 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &908001746
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 908001742}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01614664b831546d2ae94a42149d80ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_MoveRepeatDelay: 0.5
+  m_MoveRepeatRate: 0.1
+  m_XRTrackingOrigin: {fileID: 0}
+  m_ActionsAsset: {fileID: -944628639613478452, guid: faafbbbb5b91d5547a19220ba26d061d, type: 3}
+  m_PointAction: {fileID: -4723245658041798115, guid: faafbbbb5b91d5547a19220ba26d061d, type: 3}
+  m_MoveAction: {fileID: 7789649394252739038, guid: faafbbbb5b91d5547a19220ba26d061d, type: 3}
+  m_SubmitAction: {fileID: 3562211688668676590, guid: faafbbbb5b91d5547a19220ba26d061d, type: 3}
+  m_CancelAction: {fileID: -917076132774843566, guid: faafbbbb5b91d5547a19220ba26d061d, type: 3}
+  m_LeftClickAction: {fileID: 5817730186028441287, guid: faafbbbb5b91d5547a19220ba26d061d, type: 3}
+  m_MiddleClickAction: {fileID: 6035776419945036302, guid: faafbbbb5b91d5547a19220ba26d061d, type: 3}
+  m_RightClickAction: {fileID: -2765799506634038152, guid: faafbbbb5b91d5547a19220ba26d061d, type: 3}
+  m_ScrollWheelAction: {fileID: -7361543710744601652, guid: faafbbbb5b91d5547a19220ba26d061d, type: 3}
+  m_TrackedDevicePositionAction: {fileID: -7227585257017908032, guid: faafbbbb5b91d5547a19220ba26d061d, type: 3}
+  m_TrackedDeviceOrientationAction: {fileID: 1040936324188097886, guid: faafbbbb5b91d5547a19220ba26d061d, type: 3}
+  m_DeselectOnBackgroundClick: 1
+  m_PointerBehavior: 0
 --- !u!1 &918659127
 GameObject:
   m_ObjectHideFlags: 0
@@ -1939,7 +1948,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1727423314}
         m_TargetAssemblyTypeName: CharSelectMenu, Assembly-CSharp
-        m_MethodName: PlayGameCharacter
+        m_MethodName: CharacterBlue
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
