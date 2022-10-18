@@ -294,6 +294,7 @@ public class Game_Manager : MonoBehaviour
     public void PlayerDeath()
     {
         UpdateTimer();
+        StaticGlobals.final_timer = timer_text.text;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
     public string UpdateTimer()

@@ -34,7 +34,7 @@ public class PlayerController : MonoBehaviour
     private float current_invun = 0.0f;
     private bool force_heart_update = false;
     private float last_update_hp;
-    public bool immortal;
+    public bool immortal = false;
 
     [System.NonSerialized]
     public Vector2 movement_input;
@@ -166,7 +166,10 @@ public class PlayerController : MonoBehaviour
                     Debug.Log(health);
                     if (health <= 0)
                     {
-                        Debug.Log("You Died... Horribly!");
+                        if(!immortal)
+                        {
+                            manager_script.PlayerDeath();
+                        }
                     }
                 }
 

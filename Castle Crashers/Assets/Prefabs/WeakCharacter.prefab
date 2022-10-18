@@ -163,7 +163,7 @@ MonoBehaviour:
   targetTransform: {fileID: 0}
   moveSpeed: 2
   start_cd: 1
-  follow_cd: 1
+  follow_cd: 0.75
   full_hearts: 1
   online: 0
   inCombat: 0

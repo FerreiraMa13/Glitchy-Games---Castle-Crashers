@@ -168,7 +168,11 @@ public class CharacterScript : MonoBehaviour
     public void BuffEnemyPassive()
     {
         moveSpeed += 0.5f;
-        follow_cd -= 0.1f;
+        if(follow_cd > 0)
+        {
+            follow_cd -= 0.05f;
+        }
+        
         //if (AttackRate >= 0.3f)
         //    AttackRate -= 0.1f;
     }
