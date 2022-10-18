@@ -20,6 +20,7 @@ public class Game_Manager : MonoBehaviour
     public GameObject hp_prefab;
     public GameObject item_prefab;
     private GameObject prefab;
+    public GameObject graveyard; 
     public float spawn_rate = 100;
     public Vector2 offline_pos = new Vector2(900, 900);
     private List<Enemies> low_enemies = new List<Enemies>();
@@ -221,8 +222,10 @@ public class Game_Manager : MonoBehaviour
                 var enemy_script = enemy.GetComponent<CharacterScript>();
                 if (high_enemies.Contains(enemy_script))
                 {
-                    enemy_script.online = false;
-                    enemy.transform.position = offline_pos;
+                    int randomGravePointer = Random.Range(0, 4);
+                    enemy_script.online = true;
+                    //enemy.transform.position = offline_pos;
+                    enemy.transform.position = graveyard.transform.GetChild(randomGravePointer).position;
                 }
             }
         }

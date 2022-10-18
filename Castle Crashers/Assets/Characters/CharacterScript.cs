@@ -23,7 +23,9 @@ public class CharacterScript : MonoBehaviour
     [SerializeField] private bool playerInAttack = false;
     public int hearts;
     [SerializeField] private int damage = 1;
-    
+
+    public GameObject graveStones;
+
     public enum CharacterDirection
     {
         LEFT,
@@ -149,6 +151,7 @@ public class CharacterScript : MonoBehaviour
         {
             hearts = full_hearts;
             online = true;
+
             return true;
         }
         return false;
