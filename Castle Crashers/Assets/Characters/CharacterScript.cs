@@ -6,6 +6,7 @@ public class CharacterScript : MonoBehaviour
 {
     GameObject character;
     Game_Manager manager_script;
+    public GameObject target;
     [SerializeField] private Transform targetTransform;
     private Transform selfTransform;
     //public Transform selfSpawn; 
@@ -14,7 +15,6 @@ public class CharacterScript : MonoBehaviour
     private BoxCollider2D attackTrigger;
     private Vector2 attackRange = new Vector2(0, 0);
     private Vector2 characterSize = new Vector2(1, 1);
-    public GameObject target;
     public float start_cd = 1f;
     public float follow_cd = 0.25f;
     public int full_hearts = 2;
@@ -23,6 +23,8 @@ public class CharacterScript : MonoBehaviour
     [SerializeField] private bool playerInAttack = false;
     public int hearts;
     [SerializeField] private int damage = 1;
+
+    public bool isStrong = false;
 
     public GameObject graveStones;
 
@@ -46,7 +48,14 @@ public class CharacterScript : MonoBehaviour
         selfTransform = transform;
         manager_script = GameObject.FindGameObjectWithTag("Game Manager").GetComponent<Game_Manager>();
         target = GameObject.FindGameObjectWithTag("Player");
-        hearts = full_hearts;
+        if (isStrong)
+        {
+            hearts = 2;
+        }
+        else
+        {
+            hearts = 1;
+        }
     }
     private void Start()
     {

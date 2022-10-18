@@ -12,6 +12,24 @@ public class Game_Manager : MonoBehaviour
         ITEM = 2
     }
 
+    /*[SerializeField] private float timer = 1;
+    private float game_timer = 0.0f;
+    [SerializeField] private TMP_Text timer_text;
+    private float respawn_timer = 5.0f;
+    public GameObject shield_prefab;
+    public GameObject hp_prefab;
+    public GameObject item_prefab;
+    private GameObject prefab;
+    public GameObject graveyard;
+    public float spawn_rate = 100;
+    public Vector2 offline_pos = new Vector2(900, 900);
+    private List<Enemies> low_enemies = new List<Enemies>();
+    private List<CharacterScript> high_enemies = new List<CharacterScript>();
+    [SerializeField] private int round = 0;
+    private int small_enm_spawn = 1;
+    private int big_enm_spawn = 0;
+    [SerializeField] private GameObject[] spawnpoints = { null, null, null };*/
+
     [SerializeField] private float timer = 1;
     private float game_timer = 0.0f;
     [SerializeField] private TMP_Text timer_text;
@@ -20,15 +38,17 @@ public class Game_Manager : MonoBehaviour
     public GameObject hp_prefab;
     public GameObject item_prefab;
     private GameObject prefab;
-    public GameObject graveyard; 
+    public GameObject graveyard;
     public float spawn_rate = 100;
     public Vector2 offline_pos = new Vector2(900, 900);
-    private List<Enemies> low_enemies = new List<Enemies>();
+
+    private List<CharacterScript> low_enemies = new List<CharacterScript>();
     private List<CharacterScript> high_enemies = new List<CharacterScript>();
+
     [SerializeField] private int round = 0;
     private int small_enm_spawn = 1;
     private int big_enm_spawn = 0;
-    [SerializeField] private GameObject[] spawnpoints = {null,null,null};
+    [SerializeField] private GameObject[] spawnpoints = { null, null, null };
 
 
     private void Awake()
@@ -36,13 +56,20 @@ public class Game_Manager : MonoBehaviour
         var found_enemies = GameObject.FindGameObjectsWithTag("Enemy");
         foreach (var enemy in found_enemies)
         {
-            if(enemy.GetComponent<Enemies>() != null)
+            /*if (enemy.GetComponent<Enemies>() != null)
             {
                 low_enemies.Add(enemy.GetComponent<Enemies>());
-            }
-            else if(enemy.GetComponent<CharacterScript>() != null)
+            }*/
+            if (enemy.GetComponent<CharacterScript>() != null)
             {
-                high_enemies.Add(enemy.GetComponent<CharacterScript>());
+                if (enemy.GetComponent<CharacterScript>().isStrong == true)
+                {
+                    low_enemies.Add(enemy.GetComponent<CharacterScript>());
+                }
+                else
+                {
+                    high_enemies.Add(enemy.GetComponent<CharacterScript>());
+                }
             }
         }
     }
@@ -70,9 +97,8 @@ public class Game_Manager : MonoBehaviour
             }
             if (on_field_small < small_enm_spawn)
             {
-                switch (on_field_small)
+                /*switch (on_field_small)
                 {
-
                     case 0: spawnLowEnemy(spawnpoints[0].transform.position);
                         break;
 
@@ -81,14 +107,21 @@ public class Game_Manager : MonoBehaviour
 
                     case 2: spawnLowEnemy(spawnpoints[2].transform.position);
                         break;
-
+                }*/
+                foreach (var enemy in low_enemies)
+                {
+                    if (!enemy.online)
+                    {
+                        GraveSpawn(enemy);
+                        enemy.RestartEnemy();
+                    }
                 }
                 //spawnLowEnemy(Vector2.zero);
             }
 
             if (on_field_big < big_enm_spawn)
             {
-                switch (on_field_big)
+                /*switch (on_field_big)
                 {
 
                     case 0:
@@ -103,6 +136,15 @@ public class Game_Manager : MonoBehaviour
                         spawnHighEnemy(spawnpoints[2].transform.position);
                         break;
 
+                }*/
+
+                foreach (var enemy in high_enemies)
+                {
+                    if (!enemy.online)
+                    {
+                        GraveSpawn(enemy);
+                        enemy.RestartEnemy();
+                    }
                 }
             }
 
@@ -210,11 +252,19 @@ public class Game_Manager : MonoBehaviour
         {
             if(enemy.GetComponent<Enemies>() != null)
             {
-                var enemy_script = enemy.GetComponent<Enemies>();
+                /*var enemy_script = enemy.GetComponent<Enemies>();
                 if(low_enemies.Contains(enemy_script))
                 {
                     enemy_script.online = false;
                     enemy.transform.position = offline_pos;
+                }*/
+                var enemy_script = enemy.GetComponent<CharacterScript>();
+                if (low_enemies.Contains(enemy_script))
+                {
+                    enemy_script.online = false;
+                    enemy.transform.position = offline_pos;
+
+                    //GraveSpawn(enemy);
                 }
             }
             if (enemy.GetComponent<CharacterScript>() != null)
@@ -222,12 +272,21 @@ public class Game_Manager : MonoBehaviour
                 var enemy_script = enemy.GetComponent<CharacterScript>();
                 if (high_enemies.Contains(enemy_script))
                 {
-                    int randomGravePointer = Random.Range(0, 4);
-                    enemy_script.online = true;
+                    enemy_script.online = false;
                     //enemy.transform.position = offline_pos;
-                    enemy.transform.position = graveyard.transform.GetChild(randomGravePointer).position;
+                    //enemy.transform.position = graveyard.transform.GetChild(GraveSpawn()).position;
+
+                    enemy.transform.position = offline_pos;
+
+                    //GraveSpawn(enemy);
                 }
             }
         }
+    }
+    public void GraveSpawn(CharacterScript character)
+    {
+        int randomGravePointer = Random.Range(0, 4);
+        character.transform.position = graveyard.transform.GetChild(randomGravePointer).position;
+        character.RestartEnemy();
     }
 }
