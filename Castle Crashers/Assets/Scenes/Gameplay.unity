@@ -136,7 +136,7 @@ GameObject:
   - component: {fileID: 13977249}
   m_Layer: 5
   m_Name: Timer
-  m_TagString: Untagged
+  m_TagString: Timer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -718,7 +718,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1031304297358712364, guid: 03dc0546319f7764ba56afb0cefdb8bc, type: 3}
       propertyPath: online
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2210169869893199696, guid: 03dc0546319f7764ba56afb0cefdb8bc, type: 3}
       propertyPath: m_Name
@@ -1342,7 +1342,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0.13183379, g: 0.8867924, b: 0.11294055, a: 1}
+  m_Color: {r: 0.5647059, g: 0.5647059, b: 0.5647059, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -2400,6 +2400,7 @@ MonoBehaviour:
   launch_offset: {fileID: 1826001293}
   projectile_count: 0
   invunerability_timer: 2.5
+  immortal: 0
   movement_speed: 6
   closest_enemy: {fileID: 0}
   manager_script: {fileID: 0}

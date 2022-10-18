@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class Game_Manager : MonoBehaviour
 {
@@ -186,9 +187,10 @@ public class Game_Manager : MonoBehaviour
         }
 
         game_timer += Time.deltaTime;
-        int minutes = Mathf.FloorToInt(game_timer / 60.0f);
+        /*int minutes = Mathf.FloorToInt(game_timer / 60.0f);
         int seconds = Mathf.FloorToInt(game_timer - minutes * 60);
-        timer_text.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+        timer_text.text = string.Format("{0:00}:{1:00}", minutes, seconds);*/
+        timer_text.text = UpdateTimer();
     }
     public void CalculatePickUp(Vector2 position, float player_hp)
     {
@@ -288,5 +290,16 @@ public class Game_Manager : MonoBehaviour
         int randomGravePointer = Random.Range(0, 4);
         character.transform.position = graveyard.transform.GetChild(randomGravePointer).position;
         character.RestartEnemy();
+    }
+    public void PlayerDeath()
+    {
+        UpdateTimer();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+    public string UpdateTimer()
+    {
+        int minutes = Mathf.FloorToInt(game_timer / 60.0f);
+        int seconds = Mathf.FloorToInt(game_timer - minutes * 60);
+        return string.Format("{0:00}:{1:00}", minutes, seconds);
     }
 }

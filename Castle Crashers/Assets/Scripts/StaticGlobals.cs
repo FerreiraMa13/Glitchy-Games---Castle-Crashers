@@ -15,4 +15,5 @@ public class StaticGlobals : MonoBehaviour
     public static PLAYER_COLOR player_color_id;*/
 
     public static Color player_color;
+    public static string final_timer;
 }
