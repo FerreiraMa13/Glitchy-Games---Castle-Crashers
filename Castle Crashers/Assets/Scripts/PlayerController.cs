@@ -41,9 +41,16 @@ public class PlayerController : MonoBehaviour
 
     public GameObject closest_enemy;
     public Game_Manager manager_script;
+    private SpriteRenderer sprite;
 
     private void Awake()
     {
+        if (sprite = transform.GetComponentInChildren<SpriteRenderer>())
+        {
+            Debug.Log("Color selected");
+            sprite.color = StaticGlobals.player_color;
+        }
+        
         
         controller = GetComponent<CharacterController>();
         controls = new CastleCrashers();

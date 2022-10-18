@@ -5,7 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class CharSelectMenu : MonoBehaviour
 {
-    private Scene gameplay;
     public Color player_red;
     public Color player_green;
     public Color player_yellow;
@@ -13,7 +12,7 @@ public class CharSelectMenu : MonoBehaviour
 
     private void Awake()
     {
-        gameplay = SceneManager.GetSceneByName("Gameplay");
+        
     }
     public void PlayGameCharacter()
     {
@@ -21,21 +20,24 @@ public class CharSelectMenu : MonoBehaviour
     }
     public void CharacterRed()
     {
-        /*StaticGlobals.player_color_id = StaticGlobals.PLAYER_COLOR.RED;*/
+        StaticGlobals.player_color = player_red;
         PlayGameCharacter();
     }
     public void CharacterYellow()
     {
+        StaticGlobals.player_color = player_yellow;
         /*StaticGlobals.player_color_id = StaticGlobals.PLAYER_COLOR.YELLOW;*/
         PlayGameCharacter();
     }
     public void CharacterGreen()
     {
+        StaticGlobals.player_color = player_green;
         /*StaticGlobals.player_color_id = StaticGlobals.PLAYER_COLOR.GREEN;*/
         PlayGameCharacter();
     }
     public void CharacterBlue()
     {
+        StaticGlobals.player_color = player_blue;
         /*StaticGlobals.player_color_id = StaticGlobals.PLAYER_COLOR.BLUE;*/
         PlayGameCharacter();
     }
