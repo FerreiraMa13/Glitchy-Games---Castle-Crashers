@@ -816,7 +816,7 @@ MonoBehaviour:
   hp_prefab: {fileID: 423527356}
   item_prefab: {fileID: 1990666313}
   graveyard: {fileID: 1793288937}
-  spawn_rate: 0
+  spawn_rate: 50
   offline_pos: {x: 900, y: 900}
   round: 0
   spawnpoints:
@@ -2502,7 +2502,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3050622941927788187, guid: 756e6382be0a1ff458d19685755f2af6, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.21999979
+      value: 7.46
       objectReference: {fileID: 0}
     - target: {fileID: 3050622941927788187, guid: 756e6382be0a1ff458d19685755f2af6, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2648,7 +2648,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6029231119818576407, guid: b8192ac87713535468855a824d407a8d, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.59000015
+      value: 8.05
       objectReference: {fileID: 0}
     - target: {fileID: 6029231119818576407, guid: b8192ac87713535468855a824d407a8d, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2705,7 +2705,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7676314028259701979, guid: 0e5b77b6f42feb742b4a2e65f41d5828, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.27
+      value: 7.59
       objectReference: {fileID: 0}
     - target: {fileID: 7676314028259701979, guid: 0e5b77b6f42feb742b4a2e65f41d5828, type: 3}
       propertyPath: m_LocalPosition.z
