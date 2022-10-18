@@ -180,18 +180,10 @@ public class Game_Manager : MonoBehaviour
                 foreach (var small_enm in low_enemies)
                 {
                     small_enm.BuffEnemyPassive();
-                    if (round % 5 == 0)
-                    {
-                        small_enm.BuffEnemySpecial();
-                    }
                 }
                 foreach (var big_enm in high_enemies)
                 {
                     big_enm.BuffEnemyPassive();
-                    if (round % 5 == 0)
-                    {
-                        big_enm.BuffEnemySpecial();
-                    }
                 }
             }
         }
