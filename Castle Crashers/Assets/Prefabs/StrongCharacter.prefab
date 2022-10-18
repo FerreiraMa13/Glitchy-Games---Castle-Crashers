@@ -164,8 +164,8 @@ MonoBehaviour:
   moveSpeed: 2
   start_cd: 1
   follow_cd: 1
-  full_hearts: 3
-  online: 0
+  full_hearts: 1
+  online: 1
   inCombat: 0
   playerInAttack: 0
   hearts: 1
