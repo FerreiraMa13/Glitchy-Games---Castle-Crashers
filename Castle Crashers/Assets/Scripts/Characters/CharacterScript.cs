@@ -137,7 +137,7 @@ public class CharacterScript : MonoBehaviour
         {
             if (targetCollider.gameObject.tag == "Player")
             {
-                Debug.Log("in Combat");
+                //Debug.Log("in Combat");
                 target = targetCollider.gameObject;
                 inCombat = true;
             }
@@ -149,7 +149,7 @@ public class CharacterScript : MonoBehaviour
         {
             if (collision.gameObject.tag == "Player")
             {
-                Debug.Log("NOT Combat");
+                //Debug.Log("NOT Combat");
                 /*inCombat = false;*/
             }
         }

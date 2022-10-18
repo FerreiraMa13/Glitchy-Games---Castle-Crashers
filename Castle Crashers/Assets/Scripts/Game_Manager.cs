@@ -78,20 +78,24 @@ public class Game_Manager : MonoBehaviour
     {
         int on_field_small = 0;
         int on_field_big = 0;
+        //Debug.Log("low enemies - " + small_enm_spawn);
+        //Debug.Log("big enemies - " + big_enm_spawn);
         if (respawn_timer <= 0)
         {
             timer += Time.deltaTime;
-            foreach (var small_enm in low_enemies)
+            foreach (var enemy in low_enemies)
             {
-                if (small_enm.online)
+                
+                if (enemy.online)
                 {
                     on_field_small++;
+                    //Debug.Log(on_field_small);
                 }
                
             }
-            foreach (var big_enm in high_enemies)
+            foreach (var enemy in high_enemies)
             {
-                if(big_enm.online)
+                if(enemy.online)
                 {
                     on_field_big++;
                 }
@@ -100,22 +104,31 @@ public class Game_Manager : MonoBehaviour
             {
                 /*switch (on_field_small)
                 {
-                    case 0: spawnLowEnemy(spawnpoints[0].transform.position);
+                    case 0:
+                        spawnLowEnemy(spawnpoints[0].transform.position);
                         break;
 
-                    case 1: spawnLowEnemy(spawnpoints[1].transform.position);
+                    case 1:
+                        spawnLowEnemy(spawnpoints[1].transform.position);
                         break;
 
-                    case 2: spawnLowEnemy(spawnpoints[2].transform.position);
+                    case 2:
+                        spawnLowEnemy(spawnpoints[2].transform.position);
                         break;
+
                 }*/
+                //GraveSpawn(low_enemies.)
                 foreach (var enemy in low_enemies)
                 {
+
                     if (!enemy.online)
                     {
                         GraveSpawn(enemy);
-                        enemy.RestartEnemy();
+                        break;
+                        //enemy.RestartEnemy();
                     }
+
+                    //Debug.Log("I am now online - " + enemy.online);
                 }
                 //spawnLowEnemy(Vector2.zero);
             }
@@ -144,7 +157,8 @@ public class Game_Manager : MonoBehaviour
                     if (!enemy.online)
                     {
                         GraveSpawn(enemy);
-                        enemy.RestartEnemy();
+                        break;
+                        //enemy.RestartEnemy();
                     }
                 }
             }
