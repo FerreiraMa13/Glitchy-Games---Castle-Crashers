@@ -172,10 +172,14 @@ public class Game_Manager : MonoBehaviour
                 {
                     big_enm_spawn++;
                 }
-                
                 if (small_enm_spawn < 3)
                 {
                     small_enm_spawn++;
+                }
+                if(spawn_rate > 10)
+                {
+                    spawn_rate -= 4;
+                    Debug.Log(spawn_rate);
                 }
                 foreach (var small_enm in low_enemies)
                 {
@@ -206,7 +210,7 @@ public class Game_Manager : MonoBehaviour
         Debug.Log(roll);
         if (roll <= spawn_rate)
         {
-            int loot_id = Random.Range(0, 3);
+            int loot_id = Random.Range(0, 4);
             switch (loot_id) 
             {
                 case 0:
@@ -216,6 +220,9 @@ public class Game_Manager : MonoBehaviour
                     prefab = hp_prefab;
                     break;
                 case 2:
+                    prefab = item_prefab;
+                    break;
+                case 3:
                     prefab = item_prefab;
                     break;
             }
